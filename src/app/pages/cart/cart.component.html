@@ -1,0 +1,14 @@
+<ol class="list-group list-group-numbered">
+  <li *ngFor="let product of cartService.cart(); let i = index"
+      class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto"><div class="fw-bold">{{product.title}}</div>
+    </div>
+    <span class="badge bg-primary rounded-pill">$./ {{product.price}}</span>
+    <button (click)="removeProduct(i)" class="btn btn-danger ms-2">Eliminar</button>
+  </li>
+</ol>
+
+<div class="d-flex align-items-center justify-content-end gap-1">
+  <h2>Subtotal: </h2>
+  <span class="h1">{{cartService.amount()}}</span>
+</div>

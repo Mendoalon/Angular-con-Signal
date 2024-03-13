@@ -1,0 +1,54 @@
+<div class="d-grid">
+  <div class="row">
+    <div class="col-9">
+      <input
+        [formControl]="task"
+        type="email"
+        class="form-control"
+        placeholder="Ingrese la tarea"
+      />
+    </div>
+
+    <button
+      (click)="addTask()"
+      class="btn btn-primary col-3"
+      [disabled]="task.value.trim() === ''"
+    >
+      Agregar
+    </button>
+  </div>
+
+  <div class="row mt-3" *ngFor="let task of tasks()">
+    <div class="form-check align-items-center col-9">
+      <input
+        (click)="ToggleCompletedTask(task)"
+        class="form-check-input"
+        type="checkbox"
+        [value]="task.isCompleted"
+      />
+      <label
+        class="form-check-label"
+        [ngClass]="{ 'text-decoration-line-through': task.isCompleted }"
+      >
+        {{ task.name }}
+      </label>
+    </div>
+    <button (click)="deleteTask(task)" class="btn btn-danger col-3">
+      Eliminar
+    </button>
+  </div>
+  <hr />
+  <div class="d-flex justify-content-end">
+    <button
+      (click)="resetTask()"
+      *ngIf="tasks().length > 0"
+      class="btn btn-primary"
+    >
+      Eliminar Tareas
+    </button>
+  </div>
+  <div *ngIf="tasks().length > 0">
+    <P>Tareas Completadas: {{ completedTask().length }}</P>
+    <P>Tareas Incompletadas: {{ unCompletedTask().length }}</P>
+  </div>
+</div>
